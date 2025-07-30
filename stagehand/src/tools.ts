@@ -2,6 +2,7 @@ import { Stagehand } from "@browserbasehq/stagehand";
 import { CallToolResult, Tool } from "@modelcontextprotocol/sdk/types.js";
 import { getServerInstance, operationLogs } from "./logging.js";
 import { addScreenshot } from "./resources.js";
+import { TOOLS_EXTENDED } from "./tools_extended.js";
 
 // Define the Stagehand tools
 export const TOOLS: Tool[] = [
@@ -83,6 +84,7 @@ export const TOOLS: Tool[] = [
       required: ["summary"],
     },
   },
+  ...TOOLS_EXTENDED
 ];
 
 // Handle tool calls
