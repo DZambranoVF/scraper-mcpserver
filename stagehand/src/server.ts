@@ -14,6 +14,7 @@ import type { ConstructorParams } from "@browserbasehq/stagehand";
 import { sanitizeMessage } from "./utils.js";
 import { log, logRequest, logResponse, operationLogs, setServerInstance } from "./logging.js";
 import { TOOLS, handleToolCall } from "./tools.js";
+import { TOOLS_EXTENDED } from "./tools_extended.js";  
 import { PROMPTS, getPrompt } from "./prompts.js";
 import { listResources, listResourceTemplates, readResource } from "./resources.js";
 
