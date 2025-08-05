@@ -126,6 +126,35 @@ async function ensureBrowserSession(): Promise<{
 }
 
 // 3. Helper Functions
+
+async function createNewBrowserSession(sessionId: string): Promise<{ browser: Browser; page: Page }> {
+  const browser = await puppeteer.launch({
+    headless: false, // o "new" si lo prefieres
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-blink-features=AutomationControlled',
+      '--window-size=1280,800'
+    ]
+  });
+
+  const page = await browser.newPage();
+
+  // Evalúa propiedades clave para debugging antideteción
+  const debugInfo = await page.evaluate(() => ({
+    userAgent: navigator.userAgent,
+    webdriver: navigator.webdriver,
+    plugins: navigator.plugins.length,
+    languages: navigator.languages
+  }));
+  console.log("🔍 Navegador lanzado con configuración:", debugInfo);
+
+  // Retorna y guarda la sesión
+  browsers.set(sessionId, { browser, page });
+  return { browser, page };
+}
+
+/*
 async function createNewBrowserSession(sessionId: string) {
   const bb = new Browserbase({
     apiKey: process.env.BROWSERBASE_API_KEY!,
@@ -142,6 +171,7 @@ async function createNewBrowserSession(sessionId: string) {
 
   return { browser, page };
 }
+  */
 
 // 4. Tool Definitions
 const TOOLS: Tool[] = [

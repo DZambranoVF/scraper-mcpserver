@@ -1,28 +1,19 @@
-
 import { Tool } from "@modelcontextprotocol/sdk/types.js";
 
 export const TOOLS_EXTENDED: Tool[] = [
   {
     name: "stagehand_detect_forms",
-    description: "Detecta todos los formularios de la página incluyendo inputs, selects, textareas, y sus atributos.",
-    inputSchema: {
-      type: "object",
-      properties: {},
-      required: []
-    }
+    description: "Detecta todos los formularios de la página (incluyendo inputs, selects, textareas), sus atributos y handlers inline.",
+    inputSchema: { type: "object", properties: {}, required: [] }
   },
   {
     name: "stagehand_detect_ctas",
-    description: "Detecta botones o llamadas a la acción visibles en la página. Incluye texto, clases CSS, posición y visibilidad.",
-    inputSchema: {
-      type: "object",
-      properties: {},
-      required: []
-    }
+    description: "Detecta botones y llamadas a la acción visibles. Incluye texto, atributos, bounding-box, visibilidad y handlers inline.",
+    inputSchema: { type: "object", properties: {}, required: [] }
   },
   {
     name: "stagehand_detect_products",
-    description: "Detecta productos en e-commerce con nombre, precio, disponibilidad, imagen y link si están disponibles.",
+    description: "Detecta productos en e-commerce con nombre, precio, disponibilidad, cantidad, imagen, link y data-attributes. Usa selectores comunes o, si no, heurísticos genéricos.",
     inputSchema: {
       type: "object",
       properties: {
@@ -37,20 +28,28 @@ export const TOOLS_EXTENDED: Tool[] = [
   },
   {
     name: "stagehand_snapshot_dom",
-    description: "Captura el DOM completo de la página como JSON para análisis estructurado o comparación de versiones.",
-    inputSchema: {
-      type: "object",
-      properties: {},
-      required: []
-    }
+    description: "Captura el DOM completo (main frame y frames same-origin) como HTML dentro de un JSON.",
+    inputSchema: { type: "object", properties: {}, required: [] }
   },
   {
     name: "stagehand_get_metrics",
-    description: "Obtiene métricas de carga de la página: tiempo de carga, scripts, imágenes, recursos bloqueados, etc.",
-    inputSchema: {
-      type: "object",
-      properties: {},
-      required: []
-    }
+    description: "Obtiene métricas de performance (puppeteer metrics, performance.timing y recursos cargados).",
+    inputSchema: { type: "object", properties: {}, required: [] }
+  },
+  {
+    name: "stagehand_detect_scrollers",
+    description: "Detecta todos los contenedores con scroll (overflow auto/scroll y scrollHeight>clientHeight).",
+    inputSchema: { type: "object", properties: {}, required: [] }
+  },
+  {
+    name: "stagehand_inject_event_tracker",
+    description: "Inyecta un override de addEventListener para trackear dinámicamente clicks, scrolls e inputs.",
+    inputSchema: { type: "object", properties: {}, required: [] }
+  },
+  {
+    name: "stagehand_get_tracked_events",
+    description: "Recupera la lista de eventos registrados tras la inyección (click, scroll, input, etc.).",
+    inputSchema: { type: "object", properties: {}, required: [] }
   }
 ];
+
