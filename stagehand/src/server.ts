@@ -41,8 +41,9 @@ export function getStagehandConfig(apiKeys?: ApiKeys): ConstructorParams {
     env: "BROWSERBASE", // Always use BROWSERBASE since we validate keys
     apiKey: browserbaseApiKey /* API key for authentication */,
     projectId: browserbaseProjectId /* Project identifier */,
-    debugDom: false /* Enable DOM debugging features */,
+    debugDom: true /* Enable DOM debugging features */,
     headless: false /* Run browser in headless mode */,
+    
     logger: (message) =>
       console.error(logLineToString(message)) /* Custom logging function to stderr */,
     domSettleTimeoutMs: 30_000 /* Timeout for DOM to settle in milliseconds */,
@@ -53,8 +54,8 @@ export function getStagehandConfig(apiKeys?: ApiKeys): ConstructorParams {
             id: process.env.CONTEXT_ID,
             persist: true
           }
-      } : undefined
-    },
+      } : undefined,
+    },  
     enableCaching: true /* Enable caching functionality */,
     browserbaseSessionID:
       undefined /* Session ID for resuming Browserbase sessions */,
